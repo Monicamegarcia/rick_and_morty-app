@@ -3,10 +3,11 @@ import Card from './components/Card.jsx';
 import Cards from './components/Cards.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import characters, { Rick } from './data.js';
+import background from "./img/starry-night-sky.jpg";
 
 function App() {
    return (
-      <div className='App'>
+      <div style={{ backgroundImage: `url(${background})` }} className='App'>
          <SearchBar onSearch={(characterID) => window.alert(characterID)} />
          <Cards characters={characters} />
          <Card

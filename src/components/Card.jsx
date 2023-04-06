@@ -1,3 +1,6 @@
+import style from "./Card.module.css"
+
+
 export default function Card({onClose, name, status, especies, gender, origin, image}) {
    //card recibe props que es un obj = {name="", status="", especies="",...,onClose= fn}
    //entonces puedo hacer destructuring de props y recibir sus propiedades como variables
@@ -5,8 +8,8 @@ export default function Card({onClose, name, status, especies, gender, origin, i
    //entonces en el h2 recibo en vez de {props.status}, por ej, directamnte {status}
    return (
       <div>
-         <button onClick={onClose}>X</button>
-         <h2>{name}</h2>
+         <button className={style.button} onClick={onClose}>X</button>
+         <h2 className={style.h2Name}>{name}</h2>
          <h2>{status}</h2>
          <h2>{especies}</h2>
          <h2>{gender}</h2>
