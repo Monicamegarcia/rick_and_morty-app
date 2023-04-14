@@ -10,8 +10,9 @@ import axios from "axios";
 function App() {
    const [characters,setCharacters] = useState ([]);
 
-   function onSearch(character) {
-      axios(`https://rickandmortyapi.com/api/character/${character}`).then(({ data }) => {
+   function onSearch(id) {
+      axios(`https://rickandmortyapi.com/api/character/${id}`)
+      .then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
@@ -21,10 +22,10 @@ function App() {
    }
 
    const onClose = (id) => {
-     setCharacters(
-      ...characters,
-      characters.filter(character=>character.id !==id)
-     )
+      const charactersFiltered = characters.filter(character =>
+         character.id !== Number(id))
+     setCharacters(charactersFiltered)
+     
    }
    return (
       <div style={{ backgroundImage: `url(${background})` }} className='App'>
