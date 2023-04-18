@@ -8,12 +8,18 @@ import Detail from "./components/Detail.jsx";
 import background from "./img/starry-night-sky.jpg";
 import {useState} from "react";
 import axios from "axios";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useLocation} from "react-router-dom";
+import Form from "./components/Form.jsx";
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
 const API_KEY="";
 
 function App() {
+   const location = useLocation();
+   //useLocation da un objeto y tiene 
+   //varias propiedades, pathname
+   //porque necesito saber en que ruta esta
+   //posicionado el usuario
    const [characters,setCharacters] = useState ([]);
 
    function onSearch(id) {
@@ -35,16 +41,17 @@ function App() {
    }
    return (
       <div style={{ backgroundImage: `url(${background})` }} className='App'>
-         <Nav onSearch={onSearch}/>
+        {
+         location.pathname !== "/" && <Nav onSearch={onSearch}/>
+        }
+         
          <Routes>
-          <Route path="/home" element={<Cards/>}/>
+          <Route path="/" element={<Form/>} />
+          <Route path="/home" element={ <Cards onClose= {onClose} characters={characters} /> }/>
           <Route path="/About" element={<About/>}/>
           <Route path="/Detail:id" element={<Detail/>}/>
          </Routes>
-         <div>
-            <Cards onClose= {onClose} characters={characters} />  
-         </div>
-        
+    
       </div>
    );
 }
