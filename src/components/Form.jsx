@@ -1,7 +1,7 @@
 import {useState} from "react";
 import validation from "../Validation/validation.js";
 
-export default function Form (){
+export default function Form ({login}){
 
     const [errors, setErrors] = useState({})
     
@@ -22,8 +22,15 @@ export default function Form (){
         }))
     }
 
+    
+    const handleSubmit = (event) => {
+        event.preventDefault ();
+        login (userData);
+    }
+
+    //si no pongo preventfdefault, se me recarga la pagina
     return (
-        <form > 
+        <form onSubmit ={handleSubmit}> 
             <label htmlFor="email">Email:</label>
             <input type="text" name="email" value={userData.email} onChange={handleChange} />
             {errors.email && <p style={{color: "white"}}> {errors.email}</p>}
