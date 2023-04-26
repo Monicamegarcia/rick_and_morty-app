@@ -89,7 +89,7 @@ function App() {
    return (
       <div style={{ backgroundImage: `url(${background})` }} className='App'>
         {
-         location.pathname !== "/" && <Nav onSearch={onSearch}/>
+         location.pathname !== "/" && <Nav onSearch={onSearch} setAccess= {setAccess} />
         }
          
          <Routes>
