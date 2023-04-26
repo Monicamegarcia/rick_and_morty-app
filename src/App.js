@@ -10,6 +10,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 import Form from "./components/Form.jsx";
+import Favourites from "/components/Favourites";
 
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
@@ -97,11 +98,13 @@ function App() {
           <Route path="/home" element={ <Cards onClose= {onClose} characters={characters} /> }/>
           <Route path="/About" element={<About/>}/>
           <Route path="/Detail:id" element={<Detail/>}/>
+          <Route path= "/Favourites" element={<Favourites/>}/>
          </Routes>
-    
+   
       </div>
    );
 }
 
+// "/Detail:id", ojo que no sea "/Detail/:id"
 export default App;
 //<SearchBar onSearch={(characterID) => window.alert(characterID)} />

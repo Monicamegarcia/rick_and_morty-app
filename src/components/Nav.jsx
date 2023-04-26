@@ -18,6 +18,10 @@ export default function Nav ({onSearch, setAccess}) {
          <button>
             <Link to="/Home">Home</Link>
          </button>
+         <button>
+            <Link to="/Favourites">Favourites</Link>
+         </button>
+
          <button onclick={handleLogOut}>Log Out</button>
      </nav>
     )
