@@ -19,7 +19,7 @@ function Card({id, onClose, name, status, especies, gender, origin, image, addFa
       }
       else {
          setIsFav(false);
-         addFav({id, name, status, especies, gender, origin, image});
+         addFav({id, name, status, especies, gender, origin, image, onclose});
       }
    
    }
