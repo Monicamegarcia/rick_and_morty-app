@@ -14,7 +14,7 @@ export const filterCard= (gender) => {
 }
 
 export const orderCard= (order) => {
-    return { type: order, payload: order}
+    return { type: ORDER, payload: order}
 }
 
-//recordar por convencion las constantes se escriben en mayucsculas
+//recordar por convencion las constantes se escriben en mayusculas

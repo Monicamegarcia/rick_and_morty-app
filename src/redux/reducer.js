@@ -24,7 +24,10 @@ const reducer = (state=initialState, {type, payload}) => {
             const allCharactersFiltered=state.allCharacters.filter (character =>character.gender === payload)
             return {
                 ...state,
-                myFavourites:allCharactersFiltered
+                myFavourites:
+                    payload === "allCharacters"
+                    ?[...state.allCharactersFav]
+                    :allCharactersFiltered
             }
 
         case ORDER:
