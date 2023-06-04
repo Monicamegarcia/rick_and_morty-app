@@ -18,6 +18,7 @@ const API_KEY="";
 
 const email ="monicamegar@gmail.com";
 const password = "123asd";
+const URL = 'http://localhost:3001/rickandmorty/login/';
 
 function App() {
    const location = useLocation();
@@ -28,13 +29,31 @@ function App() {
    const navigate = useNavigate ();
    const [characters, setCharacters] = useState ([]);
    const [access, setAccess] = useState(false);
+   
 
-   const login = (userData) => {
-      if (userData.email === email && userData.password === password) {
-         setAccess(true);
-         navigate("/home");
+   const login = async (userData) => {
+      try {
+       const { email, password } = userData;
+       const {data} = await axios(URL + `?email=${email}&password=${password}`);
+   
+       const { access } = data;
+       setAccess(access);
+       access && navigate('/home');
+
+      } catch (error) {
+         console.log (error.message);
       }
+     
    }
+
+  // const login = (userData) => {
+    //  if (userData.email === email && userData.password === password) {
+      //   setAccess(true);
+      //   navigate("/home");
+     // }
+   //} esta fn la reemplazamos con lo que pide el CR de backend express
+   //esta nueva fn login le estamos enviando info al back, la url localhost es la ruta a nuestro back
+   //le concatena la query. con destructuring de data se ahorra linea de response
 
    //const login: como se entera mi form que hay una funcion que se llama
    //login, a la que le tiene que pasar props?
@@ -56,7 +75,7 @@ function App() {
    useEffect (() => {
       !access && navigate ("/")
 
-   }, [access])
+   }, [access, navigate])
 
    //usseEffect: si no se pone el array de dependencia [], se crea un loop infinito
    //por eso el useEffect siempre va con el []
@@ -70,16 +89,19 @@ function App() {
    //entonces no me va a llevar a otra ruta que no sea "/", no puedo entrar
    //si da true esta no se ejecuta, esto obliga a completar el login
 
-   function onSearch(id) {
-      axios(`${URL_BASE}/${id}?key=${API_KEY}`)
-      .then(({ data }) => {
+   const onSearch = async (id) => {
+      try {
+       const {data}=  await axios(`https://rickandmortyapi.com/api/character/${id}`);
+  
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
-         } else {
-            window.alert('¡No hay personajes con este ID!');
-         }
-      });
-   }
+         }; 
+         
+      } catch (error) {
+          alert('¡No hay personajes con este ID!');
+      }
+
+   };
 
    const onClose = (id) => {
       const charactersFiltered = characters.filter(character =>
